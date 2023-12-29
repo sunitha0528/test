@@ -1,0 +1,98 @@
+//purpose of resopnsive.
+
+@mixin mymedia($screen-size: 576px){
+    @media (max-width: $screen-size) {
+        @content;
+    }
+}
+
+@mixin sm () {
+    @include mymedia(576px){
+        @content;
+    };
+}
+
+@mixin md () {
+    @include mymedia(768px){
+        @content;
+    }
+}
+
+@mixin lg () {
+    @include mymedia(992px){
+        @content;
+    }
+}
+
+@mixin xl () {
+    @include mymedia(1200px){
+        @content;
+    }
+}
+
+@mixin xxl () {
+    @include mymedia(1400px){
+        @content;
+    }
+}
+
+
+// // Usage
+// div {
+//     @include sm(){
+//         .check{
+//             color:red;
+//             background: blue;
+//         }
+//     }
+//     @include md(){
+//         .check{
+//             color:yellow;
+//             background: red;
+//         }
+//     }
+//       @include lg(){
+//         .check{
+//             color:green;
+//             background: yellow;
+//         }
+//     }
+//      @include xl(){
+//         .check{
+//             color: orange;
+//             background: pink;
+//         }
+//     }
+//      @include xxl(){
+//         .check{
+//             color: lightgreen;
+//             background: black;
+//         }
+//     }
+// }
+
+
+// // How do we define dynamic class and dynamic properties and loop
+// //Define the mixin 
+// @mixin tablet2($class, $properties) {
+//     .#{$class} {
+//       @each $property, $value in $properties {
+//         #{$property}: $value;
+//       }
+      
+//       @content;
+//     }
+//   }
+  
+//   // Use the mixin
+//   .my-container {
+//     @include customStyling('custom-class', (background-color: red, font-size: 16px)) {
+//       // Additional styles for .custom-class
+//       .child-element {
+//         color: blue;
+//       }
+//     };
+    
+//     // Other styling for .my-container...
+//   }
+  

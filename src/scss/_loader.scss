@@ -1,0 +1,11 @@
+.ant-spin-nested-loading {
+    .ant-spin-blur {
+        opacity: 1 !important;
+        filter: blur(4px);
+    }
+
+    .ant-spin-blur::after {
+        opacity: 1 !important;
+        background: none;
+    }
+}

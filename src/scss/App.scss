@@ -1,0 +1,117 @@
+@import './theme';
+@import './scrollbar';
+
+//this is the antd loader, we used antd inner classes to apply styling.
+@import './loader';
+@import './media';
+
+
+//Global Css
+
+.cp {
+    cursor: pointer !important;
+}
+
+.shadow-card {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12), 0 1px 5px 0 rgba(0, 0, 0, .2);
+    transition: all 0.2s;
+
+    &.hover-me:hover {
+        box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12), 0 5px 12px 4px rgba(0, 0, 0, 0.09);
+        -webkit-transform: translate3d(0, -2px, 0);
+        transform: translate3d(0, -3px, 0) !important;
+    }
+}
+
+
+.numberInput {
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+}
+
+// .form-item-margin-bottom-0 {
+//     &.ant-form-item {
+//         margin-bottom: 0px !important;
+//     }
+// }
+
+.inline-overed-lable {
+    position: relative;
+    top: 7px;
+    z-index: 10;
+    padding: 0px 7px;
+    margin-left: 7px;
+    font-size: 12px;
+}
+
+// .gs-table {
+//     .ant-table {
+//         .ant-table-container {
+//             .ant-table-content {
+//                 // &::-webkit-scrollbar {
+//                 //     @include scrollbar.scrollbar-view(6px, 6px);
+//                 // }
+
+//                 // &::-webkit-scrollbar-track {
+//                 //     @extend %shared-scrollbar-track;
+//                 // }
+
+//                 // &::-webkit-scrollbar-thumb {
+//                 //     @extend %shared-scrollbar-thumb;
+//                 // }
+
+//                 @extend %shared-scrollbar-mini;
+//             }
+//         }
+//     }
+// }
+
+
+// .gs-body-scroll-modal {
+//     &.ant-modal {
+//         .ant-modal-content {
+//             padding: 0px !important;
+
+//             .ant-modal-header {
+//                 padding: 16px 24px 10px !important;
+//             }
+
+//             .ant-modal-body {
+//                 padding: 0px 24px 15px !important;
+//                 max-height: calc(100vh - 100px);
+//                 overflow: auto;
+//                 @extend %shared-scrollbar-mini;
+//             }
+//         }
+//     }
+// }
+
+// .mobile {
+//     &.ant-card {
+//         .ant-card-body {
+//             @include lg() {
+//                 padding: 10px !important;
+//             }
+
+//             @extend %shared-scrollbar-mini;
+//         }
+//     }
+
+//     &.ant-layout-content {
+//         @include lg() {
+//             padding: 10px !important;
+//         }
+
+//         @extend %shared-scrollbar-mini;
+//     }
+
+// }

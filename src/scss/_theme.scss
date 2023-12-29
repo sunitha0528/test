@@ -1,0 +1,32 @@
+@import './variables';
+
+/* make the customizations */
+// $theme-colors: (
+//     "primary":$primary,
+//     "secondary": $secondary,
+// );
+
+$primary-color: $primary;
+$secondary-color: $secondary;
+
+
+$border-radius: $border-radius;
+
+
+@mixin row-cols($count) {
+    >* {
+        flex: 0 0 auto;
+        width: divide(100, $count);
+    }
+}
+
+/* import bootstrap to set changes */
+@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+/* import antd styles */
+// @import 'antd/dist/reset.css';
+
+
+/* quill editor */
+// @import 'react-quill/dist/quill.snow.css';

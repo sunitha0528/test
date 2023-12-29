@@ -1,0 +1,83 @@
+$scroll-bar-box-shadow-color : inset 0 0 6px rgba(117, 117, 117, 0.1);
+$scroll-bar-box-shadow-color-2 : inset 0 0 6px rgba(0, 0, 0, 0.1);
+$scroll-bar-background-color: #d8d8d8;
+$scroll-bar-thumb-background-color: #757d85;
+
+
+%shared-scrollbar-thumb {
+  border-radius: 10px;
+  --webkit-box-shadow: $scroll-bar-box-shadow-color;
+  background-color: $scroll-bar-thumb-background-color;
+}
+
+%shared-scrollbar-track {
+  --webkit-box-shadow: $scroll-bar-box-shadow-color-2;
+  background-color: $scroll-bar-background-color;
+  border-radius: 10px;
+}
+
+@mixin scrollbar-view($sWidth: 8px, $sHeight: 8px) {
+  width: $sWidth;
+  height: $sHeight;
+  background-color: $scroll-bar-background-color;
+}
+
+
+%shared-scrollbar-mini {
+  &::-webkit-scrollbar {
+    @include scrollbar-view(6px, 6px);
+  }
+
+  &::-webkit-scrollbar-track {
+    @extend %shared-scrollbar-track;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @extend %shared-scrollbar-thumb;
+  }
+}
+
+
+
+//lg-slim scrollbar
+.lg-scrollbar-grey::-webkit-scrollbar-track {
+  @extend %shared-scrollbar-track;
+}
+
+.lg-scrollbar-grey::-webkit-scrollbar {
+  @include scrollbar-view;
+}
+
+.lg-scrollbar-grey::-webkit-scrollbar-thumb {
+  @extend %shared-scrollbar-thumb;
+}
+
+//slim scrollbar
+.scrollbar-grey::-webkit-scrollbar-track {
+  @extend %shared-scrollbar-track;
+}
+
+.scrollbar-grey::-webkit-scrollbar {
+  @include scrollbar-view(6px, 6px);
+}
+
+.scrollbar-grey::-webkit-scrollbar-thumb {
+  @extend %shared-scrollbar-thumb;
+}
+
+
+//slim scrollbar
+.smallscrollbar::-webkit-scrollbar-track {
+  @extend %shared-scrollbar-track;
+}
+
+.smallscrollbar::-webkit-scrollbar {
+  @include scrollbar-view(4px, 4px);
+}
+
+.smallscrollbar::-webkit-scrollbar-thumb {
+  @extend %shared-scrollbar-thumb;
+}
+
+// ===============
+
