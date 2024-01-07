@@ -3,17 +3,28 @@ import { Box } from '@mui/material';
 import Topbar from './Topbar';
 import Sidenav from './Sidenav';
 import { DrawerHeader } from '@components/Dashboard';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet,useNavigate } from 'react-router-dom';
+import useUserHook from '@hooks/useUserHook';
 
 
 
 const Dashboard = () => {
   const [expandSidebar, setExpandSidebar] = useState(window.innerWidth > 1025 ? true : false);
+  const { getToken } = useUserHook();
+  const navigate = useNavigate();
 
   useLayoutEffect(() => {
     window.addEventListener('resize', () => {
       setExpandSidebar(window.innerWidth > 1025 ? true : false);
     });
+  }, [])
+
+  useEffect(() => {
+    const token = getToken();
+    if(!token)
+    {
+      navigate('/')
+    }
   }, [])
 
 

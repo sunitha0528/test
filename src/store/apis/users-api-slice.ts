@@ -14,6 +14,16 @@ type UserType = {
     Phone: string,
 };
 
+type signUpUserTypeOtpVerify = {
+    token: string,
+    otp: string
+}
+
+type userLoginType = {
+    Email: string,
+    Password: string
+}
+
 type UserResponseType = {
     list: UserType[];
     TotalCount: number;
@@ -24,6 +34,43 @@ type GetAllUsersReqType = {
     pageSize: number
 };
 
+type operatorAndCirle = {
+    operator: any[],
+    circle: any[]
+}
+
+type peratorAndCircleReqType = {
+    mobile?: string,
+    operator?: string,
+    circle?: string
+}
+
+type doRechargeReqType = {
+    operator?: number,
+    canumber?: number,
+    amount?:number,
+    circle?: string,
+}
+
+type responseType  = {
+    message: string,
+    status: number,
+    success: boolean,
+    data?: any,
+    error:string
+
+
+} 
+
+type fetchBillerDetailsReqType = {
+    operator: number,    
+    canumber: string
+    ad1: string
+}
+
+type walletDetailsReqType = {
+    amount: number
+}
 
 export const usersApiSlice = createApi({
     reducerPath: 'userApis',
@@ -35,7 +82,7 @@ export const usersApiSlice = createApi({
             // get all users
             getAllUsers: builder.query<UserResponseType, Partial<GetAllUsersReqType>>({
                 query: ({ pageNo, pageSize }) => ({ url: `users/getAll?pageNo=${pageNo}&pageSize=${pageSize}`, method: 'get' }),
-                providesTags: (result) => [{ type: 'Users', id: 'LIST' }],
+                providesTags: () => [{ type: 'Users', id: 'LIST' }],
                 transformResponse: (res: any) => { return res.data },
             }),
 
@@ -67,9 +114,22 @@ export const usersApiSlice = createApi({
 
             // add user
             addUser: builder.mutation<UserType, Partial<UserType>>({
-                query: (data) => ({ url: 'users/add', method: 'post', data }),
+                query: (data) => ({ url: 'user/addUserAndGenerateOtp', method: 'post', data }),
                 invalidatesTags: [{ type: 'Users', id: 'LIST' }],
             }),
+            addUserVerifyOtp: builder.mutation<signUpUserTypeOtpVerify, Partial<signUpUserTypeOtpVerify>>({
+                query: (data) => ({ url: 'user/addUserVerifyOtp', method: 'post', data }),
+                invalidatesTags: [{ type: 'Users', id: 'LIST' }],
+            }),
+            userLogin: builder.mutation<userLoginType, Partial<userLoginType>>({
+                query: (data) => ({ url: 'user/login', method: 'post', data }),
+                invalidatesTags: [{ type: 'Users', id: 'LIST' }],
+            }),
+            userLoginOtpVerify: builder.mutation<signUpUserTypeOtpVerify, Partial<signUpUserTypeOtpVerify>>({
+                query: (data) => ({ url: 'user/loginVerifyOtp', method: 'post', data }),
+                invalidatesTags: [{ type: 'Users', id: 'LIST' }],
+            }),
+
 
             //update user by id
             updateUser: builder.mutation<UserType, Partial<UserType>>({
@@ -81,6 +141,72 @@ export const usersApiSlice = createApi({
             deleteUser: builder.mutation<UserType, Partial<number>>({
                 query: (id) => ({ url: `users/delete/${id}`, method: 'delete' }),
                 invalidatesTags: [{ type: 'Users', id: 'LIST' }],
+            }),
+
+
+            // bbps api Recharge
+
+            getOperatorAndCircle: builder.query<operatorAndCirle, void>({
+                query: () => ({ url: `bbps/recharge/getOperatorsAndCircles`, method: 'get' }),
+                transformResponse: (res: any) => { return res.data },
+            }),
+            getDefaultOperatorAndCircle: builder.mutation<peratorAndCircleReqType, Partial<peratorAndCircleReqType>>({
+                query: (data) => ({ url: `bbps/recharge/fetchhlr`, method: 'post',data }),
+                transformResponse: (res: any) => { return res.data },
+            }),
+            getRechargePlans: builder.mutation<peratorAndCircleReqType, Partial<peratorAndCircleReqType>>({
+                query: (data) => ({ url: `bbps/recharge/getPlans`, method: 'post',data }),
+                transformResponse: (res: any) => { return res.data },
+            }),
+            doRecharge: builder.mutation<responseType, Partial<doRechargeReqType>>({
+                query: (data) => ({ url: `bbps/recharge/doRecharge`, method: 'post',data }),
+                transformResponse: (res: any) => { return res },
+            }),
+
+            // bbps api DTH
+            getDTHOperators: builder.query<operatorAndCirle, void>({
+                query: () => ({ url: `bbps/DTH/operators`, method: 'get' }),
+                transformResponse: (res: any) => { return res.data },
+            }),
+
+            // bbps api biller list
+            getBillsOperators: builder.query<operatorAndCirle, void>({
+                query: () => ({ url: `bbps/bill/operators`, method: 'get' }),
+                transformResponse: (res: any) => { return res.data },
+            }),
+
+            fetchBillerDetails: builder.mutation<fetchBillerDetailsReqType, Partial<fetchBillerDetailsReqType>>({
+                query: (data) => ({ url: `bbps/bill/fetchBill`, method: 'post',data }),
+                transformResponse: (res: any) => { return res },
+            }),
+            billPayment: builder.mutation<any, Partial<any>>({
+                query: (data) => ({ url: `bbps/bill/billPayment`, method: 'post',data }),
+                transformResponse: (res: any) => { return res },
+            }),
+
+            walletDetails: builder.mutation<walletDetailsReqType, Partial<walletDetailsReqType>>({
+                query: (data) => ({ url: `payment/createOrder`, method: 'post',data }),
+                transformResponse: (res: any) => { return res },
+            }),
+            getBalance: builder.query<any, void>({
+                query: () => ({ url: `payment/getBalance`, method: 'get' }),
+                transformResponse: (res: any) => { return res },
+            }),
+            accountVerification: builder.mutation<any, Partial<any>>({
+                query: (data) => ({ url: `payment/verifyBankAccount`, method: 'post',data }),
+                transformResponse: (res: any) => { return res },
+            }),
+            addBankAccount: builder.mutation<any, Partial<any>>({
+                query: (data) => ({ url: `payment/addBankAccount`, method: 'post',data }),
+                transformResponse: (res: any) => { return res },
+            }),
+            getBankAccounts: builder.mutation<any, Partial<any>>({
+                query: (data) => ({ url: `payment/getBankAccounts`, method: 'post',data }),
+                transformResponse: (res: any) => { return res },
+            }),
+            payouts: builder.mutation<any, Partial<any>>({
+                query: (data) => ({ url: `payment/payouts`, method: 'post',data }),
+                transformResponse: (res: any) => { return res },
             }),
 
         }
@@ -95,5 +221,22 @@ export const {
     useLazyGetUsersByRoleQuery, // lazy query
     useAddUserMutation,
     useUpdateUserMutation,
-    useDeleteUserMutation
+    useDeleteUserMutation,
+    useAddUserVerifyOtpMutation,
+    useUserLoginMutation,
+    useUserLoginOtpVerifyMutation,
+    useGetOperatorAndCircleQuery,
+    useGetDefaultOperatorAndCircleMutation,
+    useGetRechargePlansMutation,
+    useDoRechargeMutation,
+    useGetDTHOperatorsQuery,
+    useGetBillsOperatorsQuery,
+    useFetchBillerDetailsMutation,
+    useBillPaymentMutation,
+    useWalletDetailsMutation,
+    useGetBalanceQuery,
+    useAccountVerificationMutation,
+    useAddBankAccountMutation,
+    useGetBankAccountsMutation,
+    usePayoutsMutation,
 } = usersApiSlice;

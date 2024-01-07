@@ -55,6 +55,7 @@ const Profile = (props: ProfilePropTypes) => {
    const onLogout = () => {
       setAnchorEl(null);
       // logout();
+      localStorage.clear();
       navigate('/login');
    };
 

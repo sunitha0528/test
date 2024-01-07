@@ -6,6 +6,7 @@ import { Drawer, DrawerHeader } from '@components/Dashboard';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Logo from '@components/Logo';
 import { ExpandLess, ExpandMore, StarBorder } from '@mui/icons-material';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 
 // import CrmProfile from 'src/components/Profie';
 
@@ -71,7 +72,7 @@ const sideNavItems: SideNavItemsTypes[] = [
     expand: false
   },
   {
-    title: 'Bbps',
+    title: 'BBPS',
     path: '/dashboard/bbps',
     icon: <PeopleIcon />,
     children: [
@@ -81,15 +82,20 @@ const sideNavItems: SideNavItemsTypes[] = [
         icon: <CampaignIcon />,
       },
       {
-        title: 'Gas Bill',
-        path: '/dashboard/bbps/gas',
+        title: 'DTH',
+        path: '/dashboard/bbps/DTH',
         icon: <CampaignIcon />,
       },
       {
-        title: 'Lic',
-        path: '/dashboard/bbps/lic',
+        title: 'Bill Payments',
+        path: '/dashboard/bbps/BillPayments',
         icon: <CampaignIcon />,
       },
+      // {
+      //   title: 'LIC Bill',
+      //   path: '/dashboard/bbps/lic',
+      //   icon: <CampaignIcon />,
+      // },
     ],
     expand: false
   },
@@ -116,6 +122,11 @@ const sideNavItems: SideNavItemsTypes[] = [
     ],
     expand: false
   },
+  {
+    title: 'Payouts',
+    path: '/dashboard/payouts',
+    icon: <AccountBalanceIcon />,
+  }
 ]
 
 
@@ -150,6 +161,8 @@ const Sidenav = (props: SidenavPropTypes) => {
   // }
 
   const onSelectRoot = (root: SideNavItemsTypes) => {
+   
+    console.log('root', root);
     let newRoots = roots.map(r => {
       if (r.path === root.path) {
         r.expand = !r.expand;
@@ -159,6 +172,9 @@ const Sidenav = (props: SidenavPropTypes) => {
       return r;
     })
     setRoots(newRoots);
+    if(!root.children){
+      navigate(root.path);
+    }
   }
 
 
@@ -173,8 +189,8 @@ const Sidenav = (props: SidenavPropTypes) => {
 
       <List style={{ paddingInline: 8 }}>
 
-        {roots && roots.map((root, index) => (
-          <>
+        {roots && roots.map((root:any, index:number) => (
+          <div key={index} >
             <ListItem key={index} disablePadding sx={(root.path === location.pathname) ? isSelected(theme) : {}}
               onClick={() => { onSelectRoot(root) }} className={root.expand ? 'bg-light' : ''} >
               <ListItemButton sx={listItemButtonStyle(expandSidebar)} >
@@ -193,7 +209,7 @@ const Sidenav = (props: SidenavPropTypes) => {
               <Collapse in={root.expand} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                   {
-                    root.children.map((child, rcindex) => (
+                    root.children.map((child:any, rcindex:number) => (
                       <ListItem key={rcindex} disablePadding sx={(child.path === location.pathname) ? isSelected(theme) : {}}
                         onClick={() => { navigate(child.path) }} >
                         <ListItemButton sx={rclistItemButtonStyle(expandSidebar)} >
@@ -208,7 +224,7 @@ const Sidenav = (props: SidenavPropTypes) => {
                 </List>
               </Collapse>
             }
-          </>
+          </div>
         ))
         }
 

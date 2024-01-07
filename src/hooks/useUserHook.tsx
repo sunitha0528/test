@@ -1,15 +1,15 @@
 
 
 import React from 'react'
-// import useDataConverter from './useDataConverter';
+import useDataConverter from './useDataConverter';
 
 // const authenticatedUserKey = "authenticatedUser"
-const authToken = "authToken"
+const authToken = "token"
 
 
 const useUserHook = () => {
 
-    // const { encrypt, decrypt } = useDataConverter()
+    const { encrypt, decrypt } = useDataConverter()
 
     const setToken = (token: string) => {
         localStorage.setItem(authToken, token);
@@ -18,16 +18,6 @@ const useUserHook = () => {
     const hasToken = () => {
         return !!localStorage.getItem(authToken);
     }
-
-    // const hasUser = () => {
-    //     return !!localStorage.getItem(authenticatedUserKey);
-    // }
-
-    // const setUser = async (user: any) => {
-    //     const encriptedUser = await encrypt(user);
-    //     localStorage.setItem(authenticatedUserKey, encriptedUser);
-    // }
-
     const getToken = () => {
         if (hasToken()) {
             return localStorage.getItem(authToken);
@@ -35,6 +25,28 @@ const useUserHook = () => {
             return null
         }
     }
+    const getDecryptData = async () => {
+        try{
+        // const key = localStorage.getItem(authToken) || '';
+        // console.log("key",key)
+        // const data:any = decrypt(key)
+        // console.log('data:',data)
+        // return JSON.parse(data)
+        const key = localStorage.getItem(authToken) || '';
+        const data:any = decrypt(key)
+        return data;
+        }
+        catch(e:any){
+            console.log(e.message)
+            return {}
+        }
+
+    }
+
+    
+
+
+
 
     // const getUser = async () => {
     //     if (hasToken() && hasUser()) {
@@ -56,7 +68,8 @@ const useUserHook = () => {
         hasToken,
         // hasUser, setUser, getUser, 
         getToken, 
-        clearUser
+        clearUser,
+        getDecryptData
     }
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Alert, AlertTitle, Box, Button, FormControl, Grid, IconButton, InputAdornment, InputLabel, Link, OutlinedInput, TextField, Typography } from '@mui/material'
+import { Alert, AlertTitle, Box, Button, FormControl,FormHelperText, Grid, IconButton, InputAdornment, InputLabel, Link, OutlinedInput, TextField, Typography } from '@mui/material'
 import Logo from '@components/Logo';
 // import EWallet from '@assets/images/e-wallet.png';
 // import CardCoins from '@assets/images/cards.png';
@@ -8,18 +8,173 @@ import IllustrationDashboard from '@assets/images/illustration_dashboard.png';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import { useUserLoginMutation,useUserLoginOtpVerifyMutation } from '@store/apis/users-api-slice';
+import Toaster from '@components/Toaster';
+import OtpModel from '@components/OtpModel';
+import Loader from '@components/Loader';
+import { useNavigate } from 'react-router-dom';
+import useUserHook from '@hooks/useUserHook';
+
+
+export type AlertColor = 'success' | 'info' | 'warning' | 'error';
+
+type ToasterProps = {
+  message: string,
+  type: AlertColor,
+  isToastOpen: boolean
+}
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [verfyToken, setVerfyToken] = useState('')
+  const { setToken } = useUserHook();
+  const navigate = useNavigate();
+  const [loginDetails, setLoginDetails] = useState({
+    Email: 'ashokcse505@gmail.com',
+    Password: 'Test@123',
+  });
+  const [error, setError] = useState({
+    email: '',
+    password: '',
+  });
+
+  const [userLogin] = useUserLoginMutation();
+  const [userLoginOtpVerify] = useUserLoginOtpVerifyMutation();
+
+  const [otpModel, setOtpModel] = useState({
+    isOtpModelOpen: false,
+    errorMessage: '',
+    warmMessage: '',
+    otp: ''
+  });
+  const [toaster, setToaster] = useState<ToasterProps>({
+    isToastOpen: false,
+    message: '',
+    type: 'success'
+  });
+
+
+  const  validateForm = () => {
+    let isValid = true;
+    const errorObj = {
+      email: '',
+      password: '',
+    }
+    if (!loginDetails.Email) {
+      errorObj.email = 'Email is required';
+      isValid = false;
+    }
+    if (!loginDetails.Password) {
+      errorObj.password = 'Password is required';
+      isValid = false;
+    }
+    setError(errorObj);
+    return isValid;
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError({
+      email: '',
+      password: '',
+    });
+    if (!validateForm()) {
+      return
+    }
+    setIsLoading(true);
+    const resp:any = await userLogin(loginDetails).unwrap();
+    setIsLoading(false);
+    console.log(resp);
+        if(resp.status === 200)
+        {
+          setVerfyToken(resp.data.token)
+          setToaster({
+            isToastOpen: true,
+            message: resp.message,
+            type: 'success'
+          });
+          setOtpModel({
+            ...otpModel,
+            warmMessage: resp.data.session,
+            isOtpModelOpen: true
+          });
+
+        }
+        else {
+          setToaster({
+            isToastOpen: true,
+            message: resp.message,
+            type: 'error'
+          });
+        }
+    // console.log(loginDetails);
+  }
+
+
+
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  };
+
+
+  /* common */
+  const toasterClose = () => {
+    setToaster({
+      isToastOpen: false,
+      message: '',
+      type: 'success'
+    });
+  }
+  /* common end */
+
+  const confirmOtp = async () => {
+    try {
+      setIsLoading(true);
+      const resp:any = await userLoginOtpVerify({
+        token: verfyToken,
+        otp:otpModel.otp
+      }).unwrap();
+      setIsLoading(false);
+      if(resp.status === 200)
+      {
+        setOtpModel({
+          ...otpModel,
+          isOtpModelOpen: false
+        });
+        setToaster({
+          isToastOpen: true,
+          message: resp.message,
+          type: 'success'
+        });
+        setToken(resp.data.data)
+      navigate('/dashboard/overview')
+
+      }
+      else {
+        setToaster({
+          isToastOpen: true,
+          message: resp.message,
+          type: 'error'
+        });
+      }
+
+    } catch (err: any) {
+      setToaster({
+        isToastOpen: true,
+        message: err.message,
+        type: 'error'
+      });
+    }
+  }
 
   return (
     <div>
       <Box py={5} px={15}>
+        {/* commom files */}
+        <Loader isLoading={isLoading} />
+        <Toaster {...toaster} toasterClose={toasterClose} />
+        <OtpModel otpModel={otpModel} setOtpModel={setOtpModel} confirmOtp={confirmOtp} />
+        {/* common files end */}
         <Grid container spacing={2}>
           <Grid item xs={3}>
             <Logo />
@@ -41,7 +196,7 @@ const Login = () => {
             <Grid item xs={4}>
               <Box mt={6}>
                 <Typography variant="h5" > Sign in to UtiliSwift </Typography>
-                <Typography variant="body1" mt={2}>  New user?  <Link href="#" underline="none">Create an account.</Link> </Typography>
+                <Typography variant="body1" mt={2}>  New user?  <Link href="/register" underline="none">Create an account.</Link> </Typography>
               </Box>
               <Box mt={4} >
                 <Alert severity="info">
@@ -52,29 +207,35 @@ const Login = () => {
               </Box>
               <Box mt={4}>
                 {/* create email , password, forgot password and login button */}
-                <Box component="form" noValidate autoComplete="off"  >
+                <Box component="form" noValidate onSubmit={handleSubmit}  autoComplete="off"  >
                   <Box>
                     <FormControl variant="outlined" fullWidth required>
                       <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
                       <OutlinedInput type={'email'} id="Email" label={'Email'}
+                      onChange={(e) => setLoginDetails({ ...loginDetails, Email: e.target.value })}
+                      value={loginDetails.Email}
+                      error={error.email? true : false}
                         endAdornment={
                           <InputAdornment position="end">
                             <MailOutlineIcon />
                           </InputAdornment>
                         }
                       />
+                      {error.email && <FormHelperText error id="accountId-error-1">{error.email}</FormHelperText>}
                     </FormControl>
                   </Box>
                   <Box mt={3}>
                     <FormControl variant="outlined" fullWidth required>
                       <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                       <OutlinedInput type={showPassword ? 'text' : 'password'} id="Password" label={'Password'}
+                      onChange={(e) => setLoginDetails({ ...loginDetails, Password: e.target.value })}
+                      value={loginDetails.Password}
+                      error={error.password? true : false}
                         endAdornment={
                           <InputAdornment position="end">
                             <IconButton
                               aria-label="toggle password visibility"
                               onClick={handleClickShowPassword}
-                              onMouseDown={handleMouseDownPassword}
                               edge="end"
                             >
                               {showPassword ? <VisibilityOff /> : <Visibility />}
@@ -82,13 +243,14 @@ const Login = () => {
                           </InputAdornment>
                         }
                       />
+                      {error.password && <FormHelperText error id="accountId-error-2">{error.password}</FormHelperText>}
                     </FormControl>
                   </Box>
                   <Box mt={3} textAlign={'end'}>
                     <Link href="#" underline="none">Forgot password?</Link>
                   </Box>
                   <Box mt={3}>
-                    <Button variant="contained" color={'success'} fullWidth size={'large'}> Login </Button>
+                    <Button variant="contained" type='submit' color={'success'} fullWidth size={'large'}> Login </Button>
                   </Box>
                 </Box>
 

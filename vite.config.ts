@@ -25,12 +25,12 @@ export default defineConfig({
     port: 3000,
 
     ////this is the purpose of cofig the surver
-    // proxy: {
-    //   '/api': {
-    //     target: 'http://localhost:5025/',
-    //     changeOrigin: true,
-    //     secure:false
-    //   }
-    // }
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5055/',
+        changeOrigin: true,
+        secure:false
+      }
+    }
   },
 })

@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 //Home
 import Home from '@modules/Home';
 import Login from '@modules/Home/Login';
+import Register from '@modules/Register/Register';
 // import Testing from '@modules/Home/Testing';
 // import ResetPassword from '@modules/Home/ResetPassword';
 // import Register from '@modules/Home/Register';
@@ -15,6 +16,7 @@ import Dashboard from '@modules/Dashboard';
 import Overview from '@modules/Dashboard/Overview';
 import Bbps from '@modules/Dashboard/Bbps';
 import Products from '@modules/Dashboard/Products';
+import Payouts from '@modules/Dashboard/Payouts';
 
 // import Network from '@modules/Dashboard/Network';
 
@@ -77,10 +79,10 @@ const AppRoots = () => {
                     path: "login",
                     element: <Login />
                 },
-                // {
-                //     path: "register",
-                //     element: <Register />
-                // },
+                {
+                    path: "register",
+                    element: <Register />
+                },
                 // {
                 //     path: "update-password/:auth",
                 //     element: <ResetPassword />
@@ -114,6 +116,10 @@ const AppRoots = () => {
                 {
                     path: "products",
                     element: <Products />
+                },
+                {
+                    path: "payouts",
+                    element: <Payouts />
                 },
                 {
                     path: "products/:id",

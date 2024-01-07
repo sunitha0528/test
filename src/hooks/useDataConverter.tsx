@@ -1,6 +1,6 @@
 import React from 'react'
 import CryptoJS from 'crypto-js';
-const secretPass = "~~!!@@##$$%%^^&&**((payutiliswift))**&&^^$$##@@!!~~";
+const secretPass = "L2PJ65Uns6MSJdPXWqGwQQZ9n5RjSWFJcoYo2pqWsBcoScyQNh4v";
 
 const useDataConverter = () => {
 
