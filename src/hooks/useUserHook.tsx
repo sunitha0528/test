@@ -1,6 +1,4 @@
 
-
-import React from 'react'
 import useDataConverter from './useDataConverter';
 
 // const authenticatedUserKey = "authenticatedUser"
@@ -9,7 +7,8 @@ const authToken = "token"
 
 const useUserHook = () => {
 
-    const { encrypt, decrypt } = useDataConverter()
+    // const { encrypt, decrypt } = useDataConverter()
+    const { decrypt } = useDataConverter()
 
     const setToken = (token: string) => {
         localStorage.setItem(authToken, token);

@@ -1,10 +1,8 @@
 import React from 'react'
-import { Box, MenuItem, Menu, Typography, Avatar } from '@mui/material';
+import { Box, MenuItem, Menu, Typography } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
-import PersonPinIcon from '@mui/icons-material/PersonPin';
 import Logout from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 
 // import { useAppContext } from 'src/context/AppContext';

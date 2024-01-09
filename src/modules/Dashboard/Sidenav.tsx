@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { Box, Collapse, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Tooltip } from '@mui/material'
+import { Collapse, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Tooltip } from '@mui/material'
 import { useTheme } from '@mui/material/styles';
 import { Drawer, DrawerHeader } from '@components/Dashboard';
 // import { useAuthContext } from 'src/context/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Logo from '@components/Logo';
-import { ExpandLess, ExpandMore, StarBorder } from '@mui/icons-material';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 
 // import CrmProfile from 'src/components/Profie';
@@ -13,9 +13,7 @@ import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 // //Icons
 import BarChartIcon from '@mui/icons-material/BarChart';
 import PeopleIcon from '@mui/icons-material/People';
-import BadgeIcon from '@mui/icons-material/Badge';
 import CampaignIcon from '@mui/icons-material/Campaign';
-import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList';
 
 
 const listItemButtonStyle = (expandSidebar: boolean) => {
@@ -136,7 +134,7 @@ type SidenavPropTypes = {
 }
 
 const Sidenav = (props: SidenavPropTypes) => {
-  const { expandSidebar, setExpandSidebar = () => { } } = props;
+  // const { expandSidebar } = props;
   // const { authState: { employee } } = useAuthContext();
 
   const [roots, setRoots] = useState<SideNavItemsTypes[]>(sideNavItems)
@@ -180,7 +178,7 @@ const Sidenav = (props: SidenavPropTypes) => {
 
 
   return (
-    <Drawer variant="permanent" open={expandSidebar} className={'smallscrollbar'}>
+    <Drawer variant="permanent" open={props.expandSidebar} className={'smallscrollbar'}>
       <DrawerHeader >
         <Logo redirectTo={() => { }} />
       </DrawerHeader>
@@ -193,11 +191,11 @@ const Sidenav = (props: SidenavPropTypes) => {
           <div key={index} >
             <ListItem key={index} disablePadding sx={(root.path === location.pathname) ? isSelected(theme) : {}}
               onClick={() => { onSelectRoot(root) }} className={root.expand ? 'bg-light' : ''} >
-              <ListItemButton sx={listItemButtonStyle(expandSidebar)} >
-                <ListItemIcon sx={listItemButtonIconsStyle(expandSidebar)} >
+              <ListItemButton sx={listItemButtonStyle(props.expandSidebar)} >
+                <ListItemIcon sx={listItemButtonIconsStyle(props.expandSidebar)} >
                   <Tooltip title={root.title} placement={'right-end'}>{root.icon}</Tooltip>
                 </ListItemIcon>
-                <ListItemText primary={root.title} sx={{ opacity: expandSidebar ? 1 : 0 }} />
+                <ListItemText primary={root.title} sx={{ opacity: props.expandSidebar ? 1 : 0 }} />
                 {(root.children && root.children.length > 0) &&
                   <>
                     {root.expand ? <ExpandLess /> : <ExpandMore />}
@@ -212,11 +210,11 @@ const Sidenav = (props: SidenavPropTypes) => {
                     root.children.map((child:any, rcindex:number) => (
                       <ListItem key={rcindex} disablePadding sx={(child.path === location.pathname) ? isSelected(theme) : {}}
                         onClick={() => { navigate(child.path) }} >
-                        <ListItemButton sx={rclistItemButtonStyle(expandSidebar)} >
-                          <ListItemIcon sx={listItemButtonIconsStyle(expandSidebar)} >
+                        <ListItemButton sx={rclistItemButtonStyle(props.expandSidebar)} >
+                          <ListItemIcon sx={listItemButtonIconsStyle(props.expandSidebar)} >
                             <Tooltip title={child.title} placement={'right-end'}>{child.icon}</Tooltip>
                           </ListItemIcon>
-                          <ListItemText primary={child.title} sx={{ opacity: expandSidebar ? 1 : 0 }} />
+                          <ListItemText primary={child.title} sx={{ opacity: props.expandSidebar ? 1 : 0 }} />
                         </ListItemButton>
                       </ListItem>
                     ))

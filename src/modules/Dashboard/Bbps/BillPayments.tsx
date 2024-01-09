@@ -2,7 +2,7 @@
 
 // BillPayments
 
-import { Box, Typography, Paper, Button, Grid, Tab, Tabs, Select, MenuItem, FormControl, FormHelperText, OutlinedInput, InputLabel, InputAdornment } from '@mui/material';
+import { Box, Typography, Paper, Button, Grid, Select, MenuItem, FormControl, FormHelperText, OutlinedInput, InputLabel, InputAdornment } from '@mui/material';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import {
     useGetBillsOperatorsQuery,
@@ -15,7 +15,7 @@ import Toaster from '@components/Toaster';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import moment from "moment";
 import useUserHook from '@hooks/useUserHook';
-import PaymentReceipt from '@components/PaymentReceipt';
+// import PaymentReceipt from '@components/PaymentReceipt';
 
 
 export type AlertColor = 'success' | 'info' | 'warning' | 'error';

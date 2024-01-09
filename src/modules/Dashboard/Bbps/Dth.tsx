@@ -1,5 +1,5 @@
-import { Box, Typography, Paper, Button, Grid, Tab, Tabs, Select, MenuItem, FormControl, FormHelperText, OutlinedInput, InputLabel, InputAdornment } from '@mui/material';
-import ContactPageIcon from '@mui/icons-material/ContactPage';
+import { Box, Typography, Paper, Button, Grid, Select, MenuItem, FormControl, FormHelperText, OutlinedInput, InputLabel } from '@mui/material';
+;
 import {
     useGetDTHOperatorsQuery,
     useDoRechargeMutation
@@ -11,11 +11,6 @@ import Toaster from '@components/Toaster';
 
 export type AlertColor = 'success' | 'info' | 'warning' | 'error';
 
-interface TabPanelProps {
-    children?: React.ReactNode;
-    index: number;
-    value: number;
-}
 type ToasterProps = {
     message: string,
     type: AlertColor,

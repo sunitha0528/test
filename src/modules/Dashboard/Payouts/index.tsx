@@ -1,5 +1,4 @@
-import { Box, Typography, Paper, Button, Grid, Tab, Tabs, Select, MenuItem, FormControl, FormHelperText, OutlinedInput, InputLabel, InputAdornment } from '@mui/material';
-import ContactPageIcon from '@mui/icons-material/ContactPage';
+import { Box, Typography, Paper, Button, Grid, FormControl, OutlinedInput, InputLabel, InputAdornment } from '@mui/material';
 import {
     useGetBankAccountsMutation
 } from '@store/apis/users-api-slice';
@@ -32,28 +31,6 @@ type ToasterProps = {
     isToastOpen: boolean
 }
 
-
-function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number,
-) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
-
-
-
 const Payouts = () => {
     const [toaster, setToaster] = useState<ToasterProps>({
         isToastOpen: false,
@@ -68,25 +45,25 @@ const Payouts = () => {
     const [getBankAccounts] = useGetBankAccountsMutation();
     const [banksList, setBanksList] = useState<any>([]);
     const [bankDetails, setBankDetails] = useState({
-        "RowNum": "1",
-        "BankDetailID": 5,
-        "IFSCCode": "KKBK0000811",
-        "BankName": "Kotak Mahindra Bank",
-        "BankUserName": "PENAMALLI ASHOK P",
-        "DisplayName": "Ashok KKB",
-        "AccountNumber": "43487889790",
-        "CreatedDate": "2024-01-07T15:41:30.857Z",
-        "Phone": "9491538125"
-        // BankDetailID: 0,
-        // AccountNumber: '',
-        // BankName: '',
-        // BankUserName: '',
-        // IFSCCode: '',
-        // Phone: '',
-        // DisplayName: '',
+        // "RowNum": "1",
+        // "BankDetailID": 5,
+        // "IFSCCode": "KKBK0000811",
+        // "BankName": "Kotak Mahindra Bank",
+        // "BankUserName": "PENAMALLI ASHOK P",
+        // "DisplayName": "Ashok KKB",
+        // "AccountNumber": "43487889790",
+        // "CreatedDate": "2024-01-07T15:41:30.857Z",
+        // "Phone": "9491538125"
+        BankDetailID: 0,
+        AccountNumber: '',
+        BankName: '',
+        BankUserName: '',
+        IFSCCode: '',
+        Phone: '',
+        DisplayName: '',
     });
 
-    const [openPayoutModel, setOpenPayoutModel] = useState(true);
+    const [openPayoutModel, setOpenPayoutModel] = useState(false);
 
     useEffect(() => {
         // console.log(searchWord);
@@ -118,11 +95,11 @@ const Payouts = () => {
             setIsLoading(false);
             if (response.data.status === 200) {
                 setBanksList(response.data.data);
-                setToaster({
-                    isToastOpen: true,
-                    message: response.data.message,
-                    type: 'success'
-                });
+                // setToaster({
+                //     isToastOpen: true,
+                //     message: response.data.message,
+                //     type: 'success'
+                // });
             }
             else {
                 setToaster({
@@ -207,7 +184,10 @@ const Payouts = () => {
                                                 <TableCell align="center">{row.IFSCCode}</TableCell>
                                                 <TableCell align="center">{row.Phone}</TableCell>
                                                 <TableCell align="center">
-                                                    <Button variant="contained" color="success" size='small' startIcon={<SendIcon />}></Button>
+                                                    <Button variant="contained" onClick={()=>{
+                                                        setBankDetails(row);
+                                                        setOpenPayoutModel(true);
+                                                    }} color="success" size='small' startIcon={<SendIcon />}></Button>
                                                 </TableCell>
                                             </TableRow>
                                         ))}

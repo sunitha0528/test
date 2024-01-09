@@ -208,6 +208,10 @@ export const usersApiSlice = createApi({
                 query: (data) => ({ url: `payment/payouts`, method: 'post',data }),
                 transformResponse: (res: any) => { return res },
             }),
+            getTransactionsByPayOutID: builder.mutation<any, Partial<any>>({
+                query: (data) => ({ url: `payment/getTransactionsByPayOutID`, method: 'post',data }),
+                transformResponse: (res: any) => { return res },
+            }),
 
         }
     }
@@ -239,4 +243,5 @@ export const {
     useAddBankAccountMutation,
     useGetBankAccountsMutation,
     usePayoutsMutation,
+    useGetTransactionsByPayOutIDMutation
 } = usersApiSlice;

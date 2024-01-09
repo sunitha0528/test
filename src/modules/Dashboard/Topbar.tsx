@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Box, IconButton, Toolbar, Typography } from '@mui/material';
+import { Box, IconButton, Toolbar } from '@mui/material';
 import { AppBar } from '@components/Dashboard';
 import Profile from '@components/Profile';
 import Logo from '@components/Logo';

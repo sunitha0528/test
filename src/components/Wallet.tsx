@@ -1,6 +1,6 @@
 
 
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Box, Grid, Paper, Button } from '@mui/material';
 import Deposit from './Deposit';
 import { useGetBalanceQuery } from '@store/apis/users-api-slice';
@@ -26,7 +26,7 @@ const Wallet = ({
 
 
     useEffect(() => {
-        if (wallet.data && wallet.data.data) {
+        if (wallet.data && wallet.data.data ) {
             setWalletDetails({
                 wallet: wallet.data.data.Amount,
                 hold: wallet.data.data.HoldAmount
@@ -34,7 +34,9 @@ const Wallet = ({
         }
         //! setAmountReload is used to refresh the wallet amount in the header
         //@ts-ignore
+        if (setAmountReload){
         setAmountReload(wallet);
+        }
     }, [wallet.data])
 
 
@@ -44,8 +46,6 @@ const Wallet = ({
     });
     const refresh = async () => {
         wallet.refetch();
-
-        // setOpenDeposit(false);
     }
 
     // const [refresh, setRefresh] = useState(false);

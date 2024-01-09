@@ -1,7 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { axiosBaseQuery } from '@store/apis/custom-fetch-base-query';
-import { type } from 'os';
-
 type RoleType = [
     RoleID: number,
     RoleName: string,
@@ -57,7 +55,8 @@ export const defaultsApiSlice = createApi({
             getRoles: builder.query<RoleResponseType, void>({
                 query: () => ({ url: `getRoles`, method: 'get' }),
                 transformResponse: (res: any) => { return res.data },
-                providesTags: (result) => [{ type: 'Roles', id: 'LIST' }]
+                // providesTags: (result) => [{ type: 'Roles', id: 'LIST' }]
+                providesTags: () => [{ type: 'Roles', id: 'LIST' }]
             }),
 
 
@@ -65,7 +64,7 @@ export const defaultsApiSlice = createApi({
             getCategories: builder.query<CategoriesResponseType, void>({
                 query: () => ({ url: `categories/getAll`, method: 'get' }),
                 transformResponse: (res: any) => { return res.data },
-                providesTags: (result) => [{ type: 'Categories', id: 'LIST' }]
+                providesTags: () => [{ type: 'Categories', id: 'LIST' }]
             }),
 
             // add categories
@@ -93,14 +92,14 @@ export const defaultsApiSlice = createApi({
             getSubCategories: builder.query<SubCategoriesResponseType, void>({
                 query: () => ({ url: `subcategories/getAll`, method: 'get' }),
                 transformResponse: (res: any) => { return res.data },
-                providesTags: (result) => [{ type: 'SubCategories', id: 'LIST' }]
+                providesTags: () => [{ type: 'SubCategories', id: 'LIST' }]
             }),
 
             // getsubcategrories by category id
             getSubCategoriesByCategoryID: builder.query<SubCategoriesResponseType, Partial<number>>({
                 query: (id) => ({ url: `subcategories/getByCategory/${id}`, method: 'get' }),
                 transformResponse: (res: any) => { return res.data },
-                providesTags: (result) => [{ type: 'SubCategories', id: 'LIST' }]
+                providesTags: () => [{ type: 'SubCategories', id: 'LIST' }]
             }),
 
 

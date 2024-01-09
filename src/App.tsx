@@ -1,4 +1,3 @@
-import React from 'react';
 import MyThemeProvider from '@context/MyTheme';
 import AppRoots from './AppRoots';
 import LoaderProvider from '@context/LoaderContext';

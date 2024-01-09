@@ -160,6 +160,7 @@ const Recharge = () => {
     }
 
     const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+        console.log(event)
         setSelectedTab(newValue);
     }
 

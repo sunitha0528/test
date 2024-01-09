@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { Box } from '@mui/material';
 import Topbar from './Topbar';
 import Sidenav from './Sidenav';

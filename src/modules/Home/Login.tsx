@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Alert, AlertTitle, Box, Button, FormControl,FormHelperText, Grid, IconButton, InputAdornment, InputLabel, Link, OutlinedInput, TextField, Typography } from '@mui/material'
+import {  Box, Button, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, Link, OutlinedInput, Typography } from '@mui/material'
 import Logo from '@components/Logo';
 // import EWallet from '@assets/images/e-wallet.png';
 // import CardCoins from '@assets/images/cards.png';
@@ -8,7 +8,7 @@ import IllustrationDashboard from '@assets/images/illustration_dashboard.png';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import { useUserLoginMutation,useUserLoginOtpVerifyMutation } from '@store/apis/users-api-slice';
+import { useUserLoginMutation, useUserLoginOtpVerifyMutation } from '@store/apis/users-api-slice';
 import Toaster from '@components/Toaster';
 import OtpModel from '@components/OtpModel';
 import Loader from '@components/Loader';
@@ -55,7 +55,7 @@ const Login = () => {
   });
 
 
-  const  validateForm = () => {
+  const validateForm = () => {
     let isValid = true;
     const errorObj = {
       email: '',
@@ -83,31 +83,30 @@ const Login = () => {
       return
     }
     setIsLoading(true);
-    const resp:any = await userLogin(loginDetails).unwrap();
+    const resp: any = await userLogin(loginDetails).unwrap();
     setIsLoading(false);
     console.log(resp);
-        if(resp.status === 200)
-        {
-          setVerfyToken(resp.data.token)
-          setToaster({
-            isToastOpen: true,
-            message: resp.message,
-            type: 'success'
-          });
-          setOtpModel({
-            ...otpModel,
-            warmMessage: resp.data.session,
-            isOtpModelOpen: true
-          });
+    if (resp.status === 200) {
+      setVerfyToken(resp.data.token)
+      setToaster({
+        isToastOpen: true,
+        message: resp.message,
+        type: 'success'
+      });
+      setOtpModel({
+        ...otpModel,
+        warmMessage: resp.data.session,
+        isOtpModelOpen: true
+      });
 
-        }
-        else {
-          setToaster({
-            isToastOpen: true,
-            message: resp.message,
-            type: 'error'
-          });
-        }
+    }
+    else {
+      setToaster({
+        isToastOpen: true,
+        message: resp.message,
+        type: 'error'
+      });
+    }
     // console.log(loginDetails);
   }
 
@@ -130,13 +129,12 @@ const Login = () => {
   const confirmOtp = async () => {
     try {
       setIsLoading(true);
-      const resp:any = await userLoginOtpVerify({
+      const resp: any = await userLoginOtpVerify({
         token: verfyToken,
-        otp:otpModel.otp
+        otp: otpModel.otp
       }).unwrap();
       setIsLoading(false);
-      if(resp.status === 200)
-      {
+      if (resp.status === 200) {
         setOtpModel({
           ...otpModel,
           isOtpModelOpen: false
@@ -147,7 +145,7 @@ const Login = () => {
           type: 'success'
         });
         setToken(resp.data.data)
-      navigate('/dashboard/overview')
+        navigate('/dashboard/overview')
 
       }
       else {
@@ -180,7 +178,11 @@ const Login = () => {
             <Logo />
           </Grid>
           <Grid item xs={9}>
-            <Typography variant="h4" > Hi, Welcome back</Typography>
+            <Box display={'flex'} justifyContent={'flex-end'} alignItems={'center'}>
+              <Typography variant="body1" >  New user?  <Link href="/register" underline="none">Create an account.</Link> </Typography>
+            </Box>
+            
+            {/* <Typography variant="h4" > Hi, Welcome back</Typography> */}
           </Grid>
         </Grid>
         <Box>
@@ -198,23 +200,23 @@ const Login = () => {
                 <Typography variant="h5" > Sign in to UtiliSwift </Typography>
                 <Typography variant="body1" mt={2}>  New user?  <Link href="/register" underline="none">Create an account.</Link> </Typography>
               </Box>
-              <Box mt={4} >
+              {/* <Box mt={4} >
                 <Alert severity="info">
                   <AlertTitle>Use the below demo details to login</AlertTitle>
                   <Typography variant="body1" > Email : <strong>user@example.com</strong> </Typography>
                   <Typography variant="body1" > Password : <strong>Test@123</strong> </Typography>
                 </Alert>
-              </Box>
+              </Box> */}
               <Box mt={4}>
                 {/* create email , password, forgot password and login button */}
-                <Box component="form" noValidate onSubmit={handleSubmit}  autoComplete="off"  >
+                <Box component="form" noValidate onSubmit={handleSubmit} autoComplete="off"  >
                   <Box>
                     <FormControl variant="outlined" fullWidth required>
                       <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
                       <OutlinedInput type={'email'} id="Email" label={'Email'}
-                      onChange={(e) => setLoginDetails({ ...loginDetails, Email: e.target.value })}
-                      value={loginDetails.Email}
-                      error={error.email? true : false}
+                        onChange={(e) => setLoginDetails({ ...loginDetails, Email: e.target.value })}
+                        value={loginDetails.Email}
+                        error={error.email ? true : false}
                         endAdornment={
                           <InputAdornment position="end">
                             <MailOutlineIcon />
@@ -228,9 +230,9 @@ const Login = () => {
                     <FormControl variant="outlined" fullWidth required>
                       <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                       <OutlinedInput type={showPassword ? 'text' : 'password'} id="Password" label={'Password'}
-                      onChange={(e) => setLoginDetails({ ...loginDetails, Password: e.target.value })}
-                      value={loginDetails.Password}
-                      error={error.password? true : false}
+                        onChange={(e) => setLoginDetails({ ...loginDetails, Password: e.target.value })}
+                        value={loginDetails.Password}
+                        error={error.password ? true : false}
                         endAdornment={
                           <InputAdornment position="end">
                             <IconButton
@@ -255,6 +257,55 @@ const Login = () => {
                 </Box>
 
               </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
+                  p: 1,
+                  m: 1,
+                  bgcolor: 'background.paper',
+                  borderRadius: 1,
+                }}
+              >
+                <Box p={1}>
+                  <Box display={'flex'} flexDirection={'column'}>
+                    <Typography variant="body1" >  Useful Links  </Typography>
+                    <Link href="#" underline="none">About Us</Link>
+                    <Link href="#" underline="none">Contact Us</Link>
+                    <Link href="#" underline="none">Privacy Policy</Link>
+                    <Link href="#" underline="none">Terms & Conditions</Link>
+                    <Link href="#" underline="none">Cancellation & Refund Policy</Link>
+                  </Box>
+                  
+                </Box>
+                <Box p={1}>
+                  <img width={200} src={"https://aashyatech.com/wp-content/uploads/2022/09/3-e1704450644266.png"} alt="wallet" className={'img-fluid'} />
+                </Box>
+                <Box p={1}>
+                  <img width={200} src={"https://aashyatech.com/wp-content/uploads/2022/09/3-e1704450644266.png"} alt="wallet" className={'img-fluid'} />
+                </Box>
+
+
+
+              </Box>
+              {/* <Box mt={6} display={'flex'} justifyContent={'center'}>
+                <img width={200} src={"https://aashyatech.com/wp-content/uploads/2022/09/3-e1704450644266.png"} alt="wallet" className={'img-fluid'} />
+              </Box>
+              <Box display={'flex'} justifyContent={'center'}>
+                <Typography variant="body1" >  Aashya Tech Solutions © 2024. All Rights Reserved. </Typography>
+
+              </Box> */}
+              {/*      <Box mt={4} >
+                <Alert severity="info">
+                  <AlertTitle>Use the below demo details to login</AlertTitle>
+                  <Typography variant="body1" > Email : <strong>user@example.com</strong> </Typography>
+                  <Typography variant="body1" > Password : <strong>Test@123</strong> </Typography>
+                </Alert>
+              </Box> */}
+
             </Grid>
           </Grid>
         </Box>
