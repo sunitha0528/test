@@ -188,7 +188,7 @@ const Login = () => {
         <Box>
           <Grid container spacing={2}>
             <Grid item xs={8}>
-              <Box mt={6} height={550} >
+              <Box mt={1} height={550} >
                 <img src={IllustrationDashboard} alt="wallet" className={'img-fluid'}
                   style={{
                     filter: 'drop-shadow(4px 10px 8px #acacac)'
@@ -196,7 +196,7 @@ const Login = () => {
               </Box>
             </Grid>
             <Grid item xs={4}>
-              <Box mt={6}>
+              <Box mt={1}>
                 <Typography variant="h5" > Sign in to UtiliSwift </Typography>
                 <Typography variant="body1" mt={2}>  New user?  <Link href="/register" underline="none">Create an account.</Link> </Typography>
               </Box>
@@ -273,19 +273,20 @@ const Login = () => {
                 <Box p={1}>
                   <Box display={'flex'} flexDirection={'column'}>
                     <Typography variant="body1" >  Useful Links  </Typography>
-                    <Link href="#" underline="none">About Us</Link>
-                    <Link href="#" underline="none">Contact Us</Link>
-                    <Link href="#" underline="none">Privacy Policy</Link>
-                    <Link href="#" underline="none">Terms & Conditions</Link>
-                    <Link href="#" underline="none">Cancellation & Refund Policy</Link>
+                    <Link href="/about" underline="none">About Us</Link>
+                    <Link href="/Contact-us" underline="none">Contact Us</Link>
+                    <Link href="/Privacy-policy" underline="none">Privacy Policy</Link>
+                    <Link href="/Terms-conditions" underline="none">Terms & Conditions</Link>
+                    <Link href="/Refund-cancellation" underline="none">Cancellation & Refund Policy</Link>
                   </Box>
                   
                 </Box>
                 <Box p={1}>
-                  <img width={200} src={"https://aashyatech.com/wp-content/uploads/2022/09/3-e1704450644266.png"} alt="wallet" className={'img-fluid'} />
+                  {/* <img width={200} src={"https://aashyatech.com/wp-content/uploads/2022/09/3-e1704450644266.png"} alt="wallet" className={'img-fluid'} /> */}
                 </Box>
                 <Box p={1}>
                   <img width={200} src={"https://aashyatech.com/wp-content/uploads/2022/09/3-e1704450644266.png"} alt="wallet" className={'img-fluid'} />
+                 
                 </Box>
 
 
@@ -305,6 +306,12 @@ const Login = () => {
                   <Typography variant="body1" > Password : <strong>Test@123</strong> </Typography>
                 </Alert>
               </Box> */}
+
+            </Grid>
+            <Grid item xs={12}>
+              <Box display={'flex'} justifyContent={'center'}>
+              <Typography variant="body1" >  Aashya Tech Solutions © 2024. All Rights Reserved. </Typography>
+              </Box>
 
             </Grid>
           </Grid>

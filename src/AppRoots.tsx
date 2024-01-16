@@ -16,7 +16,11 @@ import Overview from '@modules/Dashboard/Overview';
 import Bbps from '@modules/Dashboard/Bbps';
 import Products from '@modules/Dashboard/Products';
 import Payouts from '@modules/Dashboard/Payouts';
-
+import TermsandConditions from './modules/Info/TermsandConditions';
+import PrivacyPolicy from './modules/Info/PrivacyPolicy';
+import RefundCancellation from './modules/Info/RefundCancellation';
+import ContactUs from './modules/Info/ContactUs';
+import BBPSInformationPage from './modules/Info/BBPSInformationPage';
 // import Network from '@modules/Dashboard/Network';
 
 
@@ -82,6 +86,27 @@ const AppRoots = () => {
                     path: "register",
                     element: <Register />
                 },
+                {
+                    path: "Terms-conditions",
+                    element: <TermsandConditions />
+                },
+                {
+                    path: "Privacy-policy",
+                    element: <PrivacyPolicy />
+                },
+                {
+                    path: "Refund-cancellation",
+                    element: <RefundCancellation />
+                },
+                {
+                    path: "Contact-us",
+                    element: <ContactUs />
+                },
+                {
+                    path: "about",
+                    element: <BBPSInformationPage />
+                },
+                
                 // {
                 //     path: "update-password/:auth",
                 //     element: <ResetPassword />
