@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {  Box, Button, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, Link, OutlinedInput, Typography } from '@mui/material'
+import { Box, Button, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, Link, OutlinedInput, Typography } from '@mui/material'
 import Logo from '@components/Logo';
 // import EWallet from '@assets/images/e-wallet.png';
 // import CardCoins from '@assets/images/cards.png';
@@ -167,108 +167,101 @@ const Login = () => {
 
   return (
     <div>
-      <Box py={5} px={15}>
+      <Box py={{ md: 3, xs: 2 }} px={{ lg: 15, md:10, sm:5, xs: 1 }} >
         {/* commom files */}
         <Loader isLoading={isLoading} />
         <Toaster {...toaster} toasterClose={toasterClose} />
         <OtpModel otpModel={otpModel} setOtpModel={setOtpModel} confirmOtp={confirmOtp} />
         {/* common files end */}
         <Grid container spacing={2}>
-          <Grid item xs={3}>
+          <Grid item md={3} xs={12}>
             <Logo />
           </Grid>
-          <Grid item xs={9}>
-            <Box display={'flex'} justifyContent={'flex-end'} alignItems={'center'}>
-              <Typography variant="body1" >  New user?  <Link href="/register" underline="none">Create an account.</Link> </Typography>
+          <Grid item md={9} xs={12}>
+            <Box py={2}>
+              <Typography variant="body1" textAlign={'end'}>  New user?  <Link href="/register" underline="none">Create an account.</Link> </Typography>
             </Box>
-            
             {/* <Typography variant="h4" > Hi, Welcome back</Typography> */}
           </Grid>
         </Grid>
-        <Box>
+        <Box >
           <Grid container spacing={2}>
-            <Grid item xs={8}>
-              <Box mt={1} height={550} >
+            <Grid item md={8} xs={12}>
+              <Box mt={1} height={{ lg: 550, md: 400, xs: 'auto' }} >
                 <img src={IllustrationDashboard} alt="wallet" className={'img-fluid'}
                   style={{
                     filter: 'drop-shadow(4px 10px 8px #acacac)'
                   }} />
               </Box>
             </Grid>
-            <Grid item xs={4}>
-              <Box mt={1}>
-                <Typography variant="h5" > Sign in to UtiliSwift </Typography>
-                <Typography variant="body1" mt={2}>  New user?  <Link href="/register" underline="none">Create an account.</Link> </Typography>
-              </Box>
-              {/* <Box mt={4} >
+            <Grid item md={4} xs={12}>
+              <Box pt={5} px={{md:0 , xs:2}}>
+                <Box>
+                  <Typography variant="h5" > Sign in to UtiliSwift </Typography>
+                  <Typography variant="body1" mt={2}>  New user?  <Link href="/register" underline="none">Create an account.</Link> </Typography>
+                </Box>
+                {/* <Box mt={4} >
                 <Alert severity="info">
                   <AlertTitle>Use the below demo details to login</AlertTitle>
                   <Typography variant="body1" > Email : <strong>user@example.com</strong> </Typography>
                   <Typography variant="body1" > Password : <strong>Test@123</strong> </Typography>
                 </Alert>
               </Box> */}
-              <Box mt={4}>
-                {/* create email , password, forgot password and login button */}
-                <Box component="form" noValidate onSubmit={handleSubmit} autoComplete="off"  >
-                  <Box>
-                    <FormControl variant="outlined" fullWidth required>
-                      <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
-                      <OutlinedInput type={'email'} id="Email" label={'Email'}
-                        onChange={(e) => setLoginDetails({ ...loginDetails, Email: e.target.value })}
-                        value={loginDetails.Email}
-                        error={error.email ? true : false}
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <MailOutlineIcon />
-                          </InputAdornment>
-                        }
-                      />
-                      {error.email && <FormHelperText error id="accountId-error-1">{error.email}</FormHelperText>}
-                    </FormControl>
+                <Box mt={4}>
+                  {/* create email , password, forgot password and login button */}
+                  <Box component="form" noValidate onSubmit={handleSubmit} autoComplete="off"  >
+                    <Box>
+                      <FormControl variant="outlined" fullWidth required>
+                        <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
+                        <OutlinedInput type={'email'} id="Email" label={'Email'}
+                          onChange={(e) => setLoginDetails({ ...loginDetails, Email: e.target.value })}
+                          value={loginDetails.Email}
+                          error={error.email ? true : false}
+                          endAdornment={
+                            <InputAdornment position="end">
+                              <MailOutlineIcon />
+                            </InputAdornment>
+                          }
+                        />
+                        {error.email && <FormHelperText error id="accountId-error-1">{error.email}</FormHelperText>}
+                      </FormControl>
+                    </Box>
+                    <Box mt={3}>
+                      <FormControl variant="outlined" fullWidth required>
+                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                        <OutlinedInput type={showPassword ? 'text' : 'password'} id="Password" label={'Password'}
+                          onChange={(e) => setLoginDetails({ ...loginDetails, Password: e.target.value })}
+                          value={loginDetails.Password}
+                          error={error.password ? true : false}
+                          endAdornment={
+                            <InputAdornment position="end">
+                              <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                edge="end"
+                              >
+                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                              </IconButton>
+                            </InputAdornment>
+                          }
+                        />
+                        {error.password && <FormHelperText error id="accountId-error-2">{error.password}</FormHelperText>}
+                      </FormControl>
+                    </Box>
+                    <Box mt={3} textAlign={'end'}>
+                      <Link href="#" underline="none">Forgot password?</Link>
+                    </Box>
+                    <Box mt={3}>
+                      <Button variant="contained" type='submit' color={'success'} fullWidth size={'large'}> Login </Button>
+                    </Box>
                   </Box>
-                  <Box mt={3}>
-                    <FormControl variant="outlined" fullWidth required>
-                      <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                      <OutlinedInput type={showPassword ? 'text' : 'password'} id="Password" label={'Password'}
-                        onChange={(e) => setLoginDetails({ ...loginDetails, Password: e.target.value })}
-                        value={loginDetails.Password}
-                        error={error.password ? true : false}
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <IconButton
-                              aria-label="toggle password visibility"
-                              onClick={handleClickShowPassword}
-                              edge="end"
-                            >
-                              {showPassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                      />
-                      {error.password && <FormHelperText error id="accountId-error-2">{error.password}</FormHelperText>}
-                    </FormControl>
-                  </Box>
-                  <Box mt={3} textAlign={'end'}>
-                    <Link href="#" underline="none">Forgot password?</Link>
-                  </Box>
-                  <Box mt={3}>
-                    <Button variant="contained" type='submit' color={'success'} fullWidth size={'large'}> Login </Button>
-                  </Box>
-                </Box>
 
+                </Box>
               </Box>
             </Grid>
             <Grid item xs={12}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-around',
-                  p: 1,
-                  m: 1,
-                  bgcolor: 'background.paper',
-                  borderRadius: 1,
-                }}
+              <Box display={'flex'} flexDirection={'row'} justifyContent={'space-around'}
+                p={1} m={1} bgcolor={'background.paper'} borderRadius={1}
               >
                 <Box p={1}>
                   <Box display={'flex'} flexDirection={'column'}>
@@ -279,17 +272,15 @@ const Login = () => {
                     <Link href="/Terms-conditions" underline="none">Terms & Conditions</Link>
                     <Link href="/Refund-cancellation" underline="none">Cancellation & Refund Policy</Link>
                   </Box>
-                  
+
                 </Box>
                 <Box p={1}>
                   {/* <img width={200} src={"https://aashyatech.com/wp-content/uploads/2022/09/3-e1704450644266.png"} alt="wallet" className={'img-fluid'} /> */}
                 </Box>
                 <Box p={1}>
                   <img width={200} src={"https://aashyatech.com/wp-content/uploads/2022/09/3-e1704450644266.png"} alt="wallet" className={'img-fluid'} />
-                 
+
                 </Box>
-
-
 
               </Box>
               {/* <Box mt={6} display={'flex'} justifyContent={'center'}>
@@ -310,7 +301,7 @@ const Login = () => {
             </Grid>
             <Grid item xs={12}>
               <Box display={'flex'} justifyContent={'center'}>
-              <Typography variant="body1" >  Aashya Tech Solutions © 2024. All Rights Reserved. </Typography>
+                <Typography variant="body1" >  Aashya Tech Solutions © 2024. All Rights Reserved. </Typography>
               </Box>
 
             </Grid>

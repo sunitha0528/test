@@ -3,7 +3,9 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 //Home
 import Home from '@modules/Home';
 import Login from '@modules/Home/Login';
-import Register from '@modules/Register/Register';
+import Register from '@modules/Home/Register';
+import Landing from '@modules/Home/Landing';
+
 // import Testing from '@modules/Home/Testing';
 // import ResetPassword from '@modules/Home/ResetPassword';
 // import Register from '@modules/Home/Register';
@@ -16,11 +18,11 @@ import Overview from '@modules/Dashboard/Overview';
 import Bbps from '@modules/Dashboard/Bbps';
 import Products from '@modules/Dashboard/Products';
 import Payouts from '@modules/Dashboard/Payouts';
-import TermsandConditions from './modules/Info/TermsandConditions';
-import PrivacyPolicy from './modules/Info/PrivacyPolicy';
-import RefundCancellation from './modules/Info/RefundCancellation';
-import ContactUs from './modules/Info/ContactUs';
-import BBPSInformationPage from './modules/Info/BBPSInformationPage';
+import TermsandConditions from '@modules/Home/Info/TermsandConditions';
+import PrivacyPolicy from '@modules/Home/Info/PrivacyPolicy';
+import RefundCancellation from '@modules/Home/Info/RefundCancellation';
+import ContactUs from '@modules/Home/Info/ContactUs';
+import BBPSInformationPage from '@modules/Home/Info/BBPSInformationPage';
 // import Network from '@modules/Dashboard/Network';
 
 
@@ -75,7 +77,7 @@ const AppRoots = () => {
                 {
                     index: true,
                     path: "",
-                    element: <Login />
+                    element: <Landing />
                 },
                 {
                     index: true,
