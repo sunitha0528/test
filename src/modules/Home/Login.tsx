@@ -14,6 +14,8 @@ import OtpModel from '@components/OtpModel';
 import Loader from '@components/Loader';
 import { useNavigate } from 'react-router-dom';
 import useUserHook from '@hooks/useUserHook';
+import Footer from './Footer';
+
 
 
 export type AlertColor = 'success' | 'info' | 'warning' | 'error';
@@ -259,53 +261,8 @@ const Login = () => {
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs={12}>
-              <Box display={'flex'} flexDirection={'row'} justifyContent={'space-around'}
-                p={1} m={1} bgcolor={'background.paper'} borderRadius={1}
-              >
-                <Box p={1}>
-                  <Box display={'flex'} flexDirection={'column'}>
-                    <Typography variant="body1" >  Useful Links  </Typography>
-                    <Link href="/about" underline="none">About Us</Link>
-                    <Link href="/Contact-us" underline="none">Contact Us</Link>
-                    <Link href="/Privacy-policy" underline="none">Privacy Policy</Link>
-                    <Link href="/Terms-conditions" underline="none">Terms & Conditions</Link>
-                    <Link href="/Refund-cancellation" underline="none">Cancellation & Refund Policy</Link>
-                  </Box>
-
-                </Box>
-                <Box p={1}>
-                  {/* <img width={200} src={"https://aashyatech.com/wp-content/uploads/2022/09/3-e1704450644266.png"} alt="wallet" className={'img-fluid'} /> */}
-                </Box>
-                <Box p={1}>
-                  <img width={200} src={"https://aashyatech.com/wp-content/uploads/2022/09/3-e1704450644266.png"} alt="wallet" className={'img-fluid'} />
-
-                </Box>
-
-              </Box>
-              {/* <Box mt={6} display={'flex'} justifyContent={'center'}>
-                <img width={200} src={"https://aashyatech.com/wp-content/uploads/2022/09/3-e1704450644266.png"} alt="wallet" className={'img-fluid'} />
-              </Box>
-              <Box display={'flex'} justifyContent={'center'}>
-                <Typography variant="body1" >  Aashya Tech Solutions © 2024. All Rights Reserved. </Typography>
-
-              </Box> */}
-              {/*      <Box mt={4} >
-                <Alert severity="info">
-                  <AlertTitle>Use the below demo details to login</AlertTitle>
-                  <Typography variant="body1" > Email : <strong>user@example.com</strong> </Typography>
-                  <Typography variant="body1" > Password : <strong>Test@123</strong> </Typography>
-                </Alert>
-              </Box> */}
-
-            </Grid>
-            <Grid item xs={12}>
-              <Box display={'flex'} justifyContent={'center'}>
-                <Typography variant="body1" >  Aashya Tech Solutions © 2024. All Rights Reserved. </Typography>
-              </Box>
-
-            </Grid>
           </Grid>
+          <Footer />
         </Box>
       </Box>
     </div>

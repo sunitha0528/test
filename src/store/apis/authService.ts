@@ -5,7 +5,6 @@ export function getAuthorizationHeader() {
     const authToken = localStorage.getItem('token'); // Replace with your authentication logic
     if (authToken) {
         const data = getDecryptedData(authToken);
-        console.log('KKK:',data);
         return { Authorization: data.token };
         // return { Authorization: `Bearer ${authToken}` };
     }

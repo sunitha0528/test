@@ -1,7 +1,9 @@
 import React from 'react';
-import { AppBar, Box, Button, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar } from '@mui/material';
 import Logo from '@components/Logo';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const drawerWidth = 240;
@@ -14,6 +16,7 @@ type NavProps = {
 const Navbar = (props: NavProps) => {
    const { window } = props;
    const [mobileOpen, setMobileOpen] = React.useState(false);
+   const navigate = useNavigate();
 
    const handleDrawerToggle = () => {
       setMobileOpen((prevState) => !prevState);
@@ -30,7 +33,12 @@ const Navbar = (props: NavProps) => {
                <Box width={'100%'} display={'flex'} justifyContent={'end'}>
                   <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                      {navItems.map((item) => (
-                        <Button color="inherit" key={item} className={'px-3'}> {item}  </Button>
+                        <Button color="inherit" key={item} className={'px-3'} onClick={()=>{
+                           if(item === 'Login'){
+                              navigate('/login');
+                           }
+                        
+                        }}> {item}  </Button>
                      ))}
                   </Box>
                   <IconButton
@@ -62,7 +70,12 @@ const Navbar = (props: NavProps) => {
                   <Divider />
                   <List>
                      {navItems.map((item) => (
-                        <ListItem key={item} disablePadding>
+                        <ListItem key={item} disablePadding onClick={()=>{
+                           if(item === 'Login'){
+                              navigate('/login');
+                           }
+
+                        }}>
                            <ListItemButton sx={{ textAlign: 'center' }}>
                               <ListItemText primary={item} />
                            </ListItemButton>

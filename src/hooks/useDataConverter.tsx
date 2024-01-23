@@ -19,8 +19,14 @@ const useDataConverter = () => {
         return decrData;
     };
 
+    const decryptString = (val: string) => {
+        const bytes = CryptoJS.AES.decrypt(val, secretPass);
+        const decrData = bytes.toString(CryptoJS.enc.Utf8);
+        return decrData;
+    }
 
-    return { encrypt, decrypt }
+
+    return { encrypt, decrypt, decryptString }
 }
 
 export default useDataConverter

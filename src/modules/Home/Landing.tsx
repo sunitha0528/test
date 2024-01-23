@@ -1,5 +1,5 @@
-import { Box, Card, CardActionArea, CardContent, CardMedia, Grid, Typography, useTheme } from '@mui/material'
-import React from 'react'
+import { Box, Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from '@mui/material'
+// import React from 'react'
 import Navbar from './Navbar'
 import CardCoins from '@assets/images/cards.png';
 import styled from 'styled-components';
@@ -40,7 +40,7 @@ const servicesList = [
    },
    {
       title: 'Utility Bills',
-      description: 'PAYLINE MULTIDIGITAL SERVICES PRIVATE LIMITED offers its customers to pay their bills with just a click.',
+      description: 'AASHYA TECH SOLUTIONS PRIVATE LIMITED offers its customers to pay their bills with just a click.',
       icon: ''
    },
    {
@@ -50,7 +50,7 @@ const servicesList = [
    },
    {
       title: 'DTH Recharge',
-      description: 'If you are searching for a reliable platform to recharge your DTH online then PAYLINE MULTIDIGITAL SERVICES PRIVATE LIMITED.',
+      description: 'If you are searching for a reliable platform to recharge your DTH online then AASHYA TECH SOLUTIONS PRIVATE LIMITED.',
       icon: ''
    },
    {
@@ -69,7 +69,7 @@ const servicesList = [
 
 const Landing = () => {
 
-   const theme = useTheme();
+   // const theme = useTheme();
 
    return (
       <Box>
@@ -82,7 +82,7 @@ const Landing = () => {
                         <Box height={'100%'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
                            <Box py={3}>
                               <Typography sx={{ typography: { md: 'h3', xs: 'h4' } }} className='lh-base' color={'success.main'} >
-                                 PAYLINE MULTIDIGITAL SERVICES PRIVATE LIMITED
+                                 AASHYA TECH SOLUTIONS PRIVATE LIMITED
                               </Typography>
                               <Typography variant='h6' color={'text.secondary'}>
                                  offers UnLimited Utility Services
@@ -114,16 +114,16 @@ const Landing = () => {
                      <Box height={'100%'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
                         <Box>
                            <Typography variant='h5' color={'success.main'} lineHeight={2}>
-                              PAYLINE MULTIDIGITAL SERVICES PRIVATE LIMITED
+                              AASHYA TECH SOLUTIONS PRIVATE LIMITED
                            </Typography>
                            <Typography variant='body1' lineHeight={2} mt={2}>
                               Strong Capabilities and Competendes to deliver Customer Experience Excellence by providing Frictionless Services to our Esteemed Clients.
                            </Typography>
                            <Typography variant='body1' lineHeight={2} mt={2}>
-                              We are a Technology Based Integrated Bill Payment Solution Provider As the Name suggests "PAYLINE MULTIDIGITAL SERVICES PRIVATE LIMITED" we intend to make our services as quick as drawing PAYLINE MULTIDIGITAL SERVICES PRIVATE LIMITED. All our services are fully independent of Office/Banking hours, thus you can get Any Time, Any Thing, Any Where.
+                              We are a Technology Based Integrated Bill Payment Solution Provider As the Name suggests "AASHYA TECH SOLUTIONS PRIVATE LIMITED" we intend to make our services as quick as drawing AASHYA TECH SOLUTIONS PRIVATE LIMITED. All our services are fully independent of Office/Banking hours, thus you can get Any Time, Any Thing, Any Where.
                            </Typography>
                            <Typography variant='body1' lineHeight={1.5} mt={1}>
-                              For your convenience, our GST Number is <strong> 36AAOCP0655M1ZW.</strong>
+                              For your convenience, our GST Number is <strong> 36AAZCA2948M1ZS.</strong>
                            </Typography>
                         </Box>
                      </Box>

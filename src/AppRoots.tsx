@@ -23,6 +23,7 @@ import PrivacyPolicy from '@modules/Home/Info/PrivacyPolicy';
 import RefundCancellation from '@modules/Home/Info/RefundCancellation';
 import ContactUs from '@modules/Home/Info/ContactUs';
 import BBPSInformationPage from '@modules/Home/Info/BBPSInformationPage';
+import BillerView from '@modules/Dashboard/Bills/BillerView';
 // import Network from '@modules/Dashboard/Network';
 
 
@@ -151,6 +152,10 @@ const AppRoots = () => {
                     path: "products/:id",
                     element: <Products />
                 },
+                {
+                    path: "biller/:name",
+                    element: <BillerView />
+                }
               
             ],
         },
