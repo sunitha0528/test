@@ -24,6 +24,7 @@ import RefundCancellation from '@modules/Home/Info/RefundCancellation';
 import ContactUs from '@modules/Home/Info/ContactUs';
 import BBPSInformationPage from '@modules/Home/Info/BBPSInformationPage';
 import BillerView from '@modules/Dashboard/Bills/BillerView';
+import Utilities from '@modules/Dashboard/Utilities';
 // import Network from '@modules/Dashboard/Network';
 
 
@@ -131,6 +132,10 @@ const AppRoots = () => {
                 {
                     path: "overview",
                     element: <Overview />
+                },
+                {
+                    path: "utilities",
+                    element: <Utilities />
                 },
                 {
                     path: "bbps",

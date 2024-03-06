@@ -20,11 +20,11 @@ const Dashboard = () => {
   }, [])
 
   useEffect(() => {
-    const token = getToken();
-    if(!token)
-    {
-      navigate('/')
-    }
+    // const token = getToken();
+    // if(!token)
+    // {
+    //   navigate('/')
+    // }
   }, [])
 
 
