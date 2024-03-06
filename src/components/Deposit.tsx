@@ -11,7 +11,9 @@ import {
   FormControl,
   InputLabel,
   OutlinedInput,
-  InputAdornment
+  InputAdornment,
+  Select,
+  MenuItem
 } from "@mui/material";
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { useWalletDetailsMutation } from '@store/apis/users-api-slice';
@@ -40,6 +42,7 @@ const Deposit = ({
   refresh
 }: DepositProps) => {
   const [amount, setAmount] = useState(0);
+  const [pg, setPg] = useState('Phone Pe' as string);
   const [userWalletDetails] = useWalletDetailsMutation();
   const [toaster, setToaster] = useState<ToasterProps>({
     isToastOpen: false,
@@ -51,8 +54,15 @@ const Deposit = ({
   const deposit = async () => {
     try {
       setIsLoading(true);
+      const data = {
+        amount: amount,
+        MUID: "MUID" + Date.now(),
+        pg: pg,
+        transactionId: 'T' + Date.now(),
+      }
       const response: any = await userWalletDetails({
-        amount: amount
+        ...data
+        // amount: amount
       });
       setIsLoading(false);
       if (response.data.status === 200) {
@@ -62,7 +72,12 @@ const Deposit = ({
           type: 'success'
         });
         // console.log(response.data.data)
-        openRazorpay(response.data.data)
+        if (pg === 'Razorpay') {
+          openRazorpay(response.data.data)
+        }
+        else {
+          window.open(response.data.data.data.instrumentResponse.redirectInfo.url,"_self")
+        }
         // refresh();
         // setOpenDeposit(false);
       }
@@ -202,6 +217,21 @@ const Deposit = ({
                     }
                   />
                 </FormControl>
+                <Box mt={2}>
+                  <FormControl fullWidth required size="small">
+                    <InputLabel id="demo-simple-select-label">PG</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      label="PG"
+                      value={pg}
+                      onChange={(e) => setPg(e.target.value as string)}
+                    >
+                      <MenuItem value={'Phone Pe'}>Phone Pe</MenuItem>
+                      <MenuItem value={'Razorpay'}>Razorpay</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
               </Box>
             </Box>
           </Grid>

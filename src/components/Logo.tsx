@@ -15,7 +15,7 @@ const Logo = (props: LogoProps) => {
 
    return (
       <StyledLogo onClick={redirectTo} >
-         <img src={'https://aashyatech.com/wp-content/uploads/2022/09/3-e1704450644266.png'} alt="VW-LOGO" height={height} />
+         <img src={'https://aashyatech.com/wp-content/themes/aashya-tech/assets/img/aashyatech-logo.png'} alt="VW-LOGO" height={height} />
          {/* <Typography variant="h4"> Logo</Typography> */}
 
       </StyledLogo>
