@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 import CardCoins from '@assets/images/cards.png'
 import { Box, Grid } from '@mui/material'
@@ -40,7 +39,7 @@ const Utilities = () => {
          <Grid container rowSpacing={7} columnSpacing={2}>
 
             {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) =>
-               <Grid item xs={12} sm={6} md={4} lg={3} >
+               <Grid key={item+index} item xs={12} sm={6} md={4} lg={3} >
                   <StyledUtilCard m={'auto'}>
                      <img className='util-icon' src={CardCoins} alt="CardCoins" />
                   </StyledUtilCard>
